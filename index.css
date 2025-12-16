@@ -1,0 +1,770 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+ 
+
+.bricolage-grotesque-uniquifier {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+  }
+
+/* 1. MANTENHA O FUNDO NO BODY (Isso evita a bagunça do zoom) */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Monalisa Serif', sans-serif;
+    background-color: #fff;
+    
+    /* A imagem fixa no fundo do site */
+    background-image: url('imagens/Pattern.png');
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% 400px; /* Trava a altura do fundo em 400px */
+}
+
+header {
+    background: transparent;
+    width: 100%;
+    
+    /* --- ALTURA E POSIÇÃO --- */
+    height: 120px;      /* Altura menor para o cabeçalho */
+    padding-top: 40px;  /* Quase colado no topo (Isso faz ele subir) */
+    margin-bottom: 100px; /* Empurra o "Conheça Nosso Trabalho" para baixo */
+
+    /* --- ALINHAMENTO --- */
+    display: flex;
+    flex-direction: row;      /* Lado a Lado */
+    flex-wrap: nowrap;        /* Proíbe quebrar linha */
+    justify-content: center;  /* Centraliza o conjunto na tela */
+    align-items: center;      /* Alinha verticalmente */
+    
+    /* Reduzi o espaço entre Logo e Menu para não estourar a tela */
+    gap: 30px; 
+}
+
+/* 3. O TÍTULO E CONTEÚDO */
+h1 {
+    /* Se o título estiver muito colado no menu, aumente aqui */
+    margin-top: 50px; 
+    text-align: center;
+    position: relative;
+    font-family: 'Monalisa Serif', sans-serif;
+    font-weight: 200;
+    font-size: 30px;
+                                                
+}
+
+/* --- CSS PARA O H1HOME (O container da imagem) --- */
+.h1Home {
+    /* 1. MENOR: Definimos uma altura fixa e menor. 
+       Pode ajustar este valor (ex: 50px, 70px) conforme necessário. */
+    height: 60px; 
+
+    /* 2. CENTRALIZADO: Usamos Flexbox para alinhar o conteúdo */
+    display: flex;             /* Ativa o modo Flexbox */
+    justify-content: center;   /* Centraliza na horizontal (esquerda/direita) */
+    align-items: center;       /* Centraliza na vertical (cima/baixo) */
+    
+    /* Garante que a largura da caixa se ajuste ao conteúdo */
+    width: 100%; /* Ocupa a largura disponível para centralizar na tela */
+    margin-top: 30px; /* Adicione um espaço acima se estiver muito colado no menu */
+}
+
+/* --- CSS PARA A IMAGEM DENTRO DO H1HOME --- */
+/* Isso é importante para garantir que a imagem obedeça ao tamanho da caixa */
+.h1Home img {
+    /* A imagem terá no máximo a altura da caixa (60px) */
+    max-height: 100%; 
+    
+    /* A largura será ajustada automaticamente para não distorcer */
+    width: auto;  
+    
+    /* Remove espaços extras indesejados abaixo da imagem */
+    display: block;
+}
+
+header img{
+height: 70px;
+width: auto; 
+display: block;
+}
+  
+  
+  #AncorasNavegacao {
+      display: flex;
+      margin-top: 10px;
+      justify-content: center; 
+      align-items: center;   
+  }
+  
+  #AncorasNavegacao a {
+      margin: 0 30px; 
+      color: #00AFEF;         
+      text-decoration: none; 
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: 25px;
+  }
+  
+  #AncorasNavegacao a:hover {
+      color: #c44ce2; 
+  }
+
+/* Isso garante que a imagem fique flutuando por cima do carrossel */
+.overlay-degrade {
+  position: absolute; /* Libera a imagem para flutuar */
+  top: 0;
+  left: 0;
+  width: 100%;  /* Ocupa toda a largura do container pai */
+  height: 100%;
+  
+  /* O z-index 10 garante que fique acima das imagens do carrossel (que não tem z-index definido ou é menor) */
+  z-index: 10; 
+  
+  /* IMPORTANTE: Isso permite que o mouse "atravesse" a imagem do degradê.
+     Sem isso, você não conseguiria clicar ou passar o mouse nas fotos do carrossel 
+     porque o degradê estaria bloqueando. */
+  pointer-events: none; 
+  
+  /* Ajuste de como a imagem se comporta */
+  object-fit: fill; /* Força a imagem a preencher o espaço (testar também 'cover' se distorcer muito) */
+}
+
+  .carousel-container {
+    width: 100%;
+    /* margin: 60px 0; REMOVIDO para dar mais controle ao .carousel-track */
+    padding: 40px 0; /* Espaçamento vertical interno */
+    overflow: hidden; /* ESSENCIAL para esconder o que desliza fora da tela */
+    position: relative;
+    z-index: 5;
+  }
+  
+  .carousel-track {
+    display: flex;
+    width: max-content; /* Deixe o conteúdo definir a largura */
+    animation: scrollInfinito 40s linear infinite; /* Ajuste 40s para mais lento ou mais rápido */
+  }
+  /* 3. A Animação de Deslizamento */
+  @keyframes scrollInfinito {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* * Se você tem 16 itens no total, e quer que o loop seja imperceptível,
+         * você deve mover 50% (que corresponde aos primeiros 8 itens).
+         */
+        transform: translateX(-50%);
+    }
+  }
+  
+  /* 4. Pausar a Animação ao Passar o Mouse */
+  .carousel-container:hover .carousel-track {
+    animation-play-state: paused;
+  }
+  
+  /* 5. Os Itens Individuais do Carrossel (as imagens com legendas) */
+  .carousel-item {
+    width: 500px; /* Largura FIZCA para cada item */
+    height: 400px; /* Altura FIZCA para cada item */
+    
+    /* Espaçamento entre os itens */
+    margin: 0 15px; 
+    
+    /* IMPEDE que o flexbox tente encolher este item */
+    flex-shrink: 0; 
+    
+    position: relative; /* Necessário para posicionar a legenda */
+    border-radius: 15px;
+    overflow: hidden; /* Corta a imagem se ela for maior que o item */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Sombra elegante */
+    
+    /* Centraliza o conteúdo visualmente (útil se o conteúdo for menor) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* 6. As Imagens Dentro dos Itens */
+  .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ESSENCIAL: Garante que a imagem preencha o espaço sem distorcer, cortando se necessário */
+    display: block; /* Remove espaços extras comuns em imagens */
+    transition: transform 0.3s ease; /* Transição suave para o zoom */
+  }
+  
+  /* 7. Efeito de Zoom na Imagem ao Passar o Mouse */
+  .carousel-item:hover img {
+    transform: scale(1.1); /* Zoom sutil */
+  }
+  
+  /* 8. As Legendas dos Itens */
+  .carousel-caption {
+    position: absolute;
+    bottom: 0; /* Alinha na parte inferior */
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente */
+    color: white;
+    text-align: left; /* Alinha o texto da legenda à esquerda */
+    transform: translateY(100%); /* Esconde a legenda inicialmente */
+    transition: transform 0.3s ease; /* Transição suave para aparecer */
+  }
+  
+  /* 9. Mostrar a Legenda ao Passar o Mouse */
+  .carousel-item:hover .carousel-caption {
+    transform: translateY(0); /* Faz a legenda deslizar para cima */
+  }
+  
+  .carousel-caption h3 {
+    margin-bottom: 5px;
+    color: var(--primary-color); /* Usa sua cor primária */
+    font-size: 1.2rem;
+  }
+  
+  .carousel-caption p {
+    font-size: 0.9rem;
+    margin: 0; /* Remove margem padrão do parágrafo */
+    line-height: 1.3;
+  }
+
+.ImageSection2{
+       height: 530px; 
+       display: flex;             /* Ativa o modo Flexbox */
+       justify-content: center;   /* Centraliza na horizontal (esquerda/direita) */
+       align-items: center;       /* Centraliza na vertical (cima/baixo) */
+       width: 100%; /* Ocupa a largura disponível para centralizar na tela */
+       margin-top: 30px; /* Adicione um espaço acima se estiver muito colado no menu */
+}
+   
+.ImageSection2 img {
+       max-height: 100%; 
+       width: auto;  
+       display: block;
+}
+
+.ImageSection2-2{
+  height: 300px; 
+  display: flex;             /* Ativa o modo Flexbox */
+  justify-content: center;   /* Centraliza na horizontal (esquerda/direita) */
+  align-items: center;       /* Centraliza na vertical (cima/baixo) */
+  width: 100%; /* Ocupa a largura disponível para centralizar na tela */
+  margin-top: 5px; /* Adicione um espaço acima se estiver muito colado no menu */
+}
+
+.ImageSection2-2 img {
+  max-height: 100%; 
+  width: auto;  
+  display: block;
+}
+
+h2 {
+      color: #00AFEF;         
+      text-decoration: none; 
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: 30px;
+      display: flex;
+      margin-top: 30px;
+      justify-content: center; 
+      align-items: center;   
+}
+
+/* --- CONTAINER GERAL (A GRADE) --- */
+.container-servicos {
+  display: grid;
+  /* Ajusta automaticamente as colunas */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- O CARTÃO AZUL --- */
+.card-servico {
+  background-color: #00AFEF; /* Azul Cyan */
+  border-radius: 20px;
+  padding: 15px; /* Borda interna azul */
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 15px dá um respiro entre a imagem e o texto */
+  gap: 15px; 
+  
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.card-servico:hover {
+  transform: translateY(-5px);
+}
+
+/* --- A IMAGEM --- */
+.img-container {
+  width: 100%;
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  /* Mantém a imagem quadrada. Se quiser retangular, apague a linha abaixo */
+  aspect-ratio: 1 / 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- O NOME DO SERVIÇO --- */
+.flagbanner1 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+.cartaodevisita2 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+.cartaobopp3 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+.cavalete4 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+.adesivo5 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+.blococomum6 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+.blococopiativo7 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+.banner8 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+.panfleto9 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+.fachadalona10 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+.fachadaacm11 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+.plotagem12 {
+  background-color: #fff;
+  color: #FF007F; /* Rosa Pink */
+  width: 100%;
+  padding: 12px 0; /* Aumentei um pouco o padding para ficar mais "botão" */
+  text-align: center;
+  border-radius: 10px;
+  
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 18px; /* Fonte um pouco maior para destacar mais */
+  text-transform: uppercase;
+}
+
+/* Isso garante que a imagem fique flutuando por cima do carrossel */
+.overlay-degrade2 {
+  position: absolute; /* Libera a imagem para flutuar */
+  top: 0;
+  left: 0;
+  width: 100%;  /* Ocupa toda a largura do container pai */
+  height: 150%;
+  
+  /* O z-index 10 garante que fique acima das imagens do carrossel (que não tem z-index definido ou é menor) */
+  z-index: 10; 
+  
+  /* IMPORTANTE: Isso permite que o mouse "atravesse" a imagem do degradê.
+     Sem isso, você não conseguiria clicar ou passar o mouse nas fotos do carrossel 
+     porque o degradê estaria bloqueando. */
+  pointer-events: none; 
+  
+  /* Ajuste de como a imagem se comporta */
+  object-fit: fill; /* Força a imagem a preencher o espaço (testar também 'cover' se distorcer muito) */
+}
+
+  .carousel-container2 {
+    width: 100%;
+    /* margin: 60px 0; REMOVIDO para dar mais controle ao .carousel-track */
+    padding: 40px 0; /* Espaçamento vertical interno */
+    overflow: hidden; /* ESSENCIAL para esconder o que desliza fora da tela */
+    position: relative;
+    z-index: 5;
+  }
+  
+  .carousel-track2 {
+    display: flex;
+    width: max-content; /* Deixe o conteúdo definir a largura */
+    animation: scrollInfinito 40s linear infinite; /* Ajuste 40s para mais lento ou mais rápido */
+  }
+  /* 3. A Animação de Deslizamento */
+  @keyframes scrollInfinito {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* * Se você tem 16 itens no total, e quer que o loop seja imperceptível,
+         * você deve mover 50% (que corresponde aos primeiros 8 itens).
+         */
+        transform: translateX(-50%);
+    }
+  }
+  
+  /* 4. Pausar a Animação ao Passar o Mouse */
+  .carousel-container2:hover .carousel-track {
+    animation-play-state: paused;
+  }
+  
+  /* 5. Os Itens Individuais do Carrossel (as imagens com legendas) */
+  .carousel-item2 {
+    width: 200px; /* Largura FIZCA para cada item */
+    height: 130px; /* Altura FIZCA para cada item */
+    
+    /* Espaçamento entre os itens */
+    margin: 0 15px; 
+    
+    /* IMPEDE que o flexbox tente encolher este item */
+    flex-shrink: 0; 
+    
+    position: relative; /* Necessário para posicionar a legenda */
+    border-radius: 15px;
+    overflow: hidden; /* Corta a imagem se ela for maior que o item */
+    
+    /* Centraliza o conteúdo visualmente (útil se o conteúdo for menor) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* 6. As Imagens Dentro dos Itens */
+  .carousel-item2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ESSENCIAL: Garante que a imagem preencha o espaço sem distorcer, cortando se necessário */
+    display: block; /* Remove espaços extras comuns em imagens */
+    transition: transform 0.3s ease; /* Transição suave para o zoom */
+  }
+  
+  /* 7. Efeito de Zoom na Imagem ao Passar o Mouse */
+  .carousel-item2:hover img {
+    transform: scale(1.1); /* Zoom sutil */
+  }
+  
+  
+  /* 9. Mostrar a Legenda ao Passar o Mouse */
+  .carousel-item2:hover .carousel-caption2 {
+    transform: translateY(0); /* Faz a legenda deslizar para cima */
+  }
+  
+  .carousel-caption2 h3 {
+    margin-bottom: 5px;
+    color: var(--primary-color); /* Usa sua cor primária */
+    font-size: 1.2rem;
+  }
+  
+  .carousel-caption2 p {
+    font-size: 0.9rem;
+    margin: 0; /* Remove margem padrão do parágrafo */
+    line-height: 1.3;
+  }
+
+  .h3Home {
+    /* 1. MENOR: Definimos uma altura fixa e menor. 
+       Pode ajustar este valor (ex: 50px, 70px) conforme necessário. */
+    height: 40px; 
+
+    /* 2. CENTRALIZADO: Usamos Flexbox para alinhar o conteúdo */
+    display: flex;             /* Ativa o modo Flexbox */
+    justify-content: center;   /* Centraliza na horizontal (esquerda/direita) */
+    align-items: center;       /* Centraliza na vertical (cima/baixo) */
+    
+    /* Garante que a largura da caixa se ajuste ao conteúdo */
+    width: 100%; /* Ocupa a largura disponível para centralizar na tela */
+    margin-top: 30px; /* Adicione um espaço acima se estiver muito colado no menu */
+}
+
+/* --- CSS PARA A IMAGEM DENTRO DO H1HOME --- */
+/* Isso é importante para garantir que a imagem obedeça ao tamanho da caixa */
+.h3Home img {
+    /* A imagem terá no máximo a altura da caixa (60px) */
+    max-height: 100%; 
+    
+    /* A largura será ajustada automaticamente para não distorcer */
+    width: auto;  
+    
+    /* Remove espaços extras indesejados abaixo da imagem */
+    display: block;
+}
+
+/* --- A CAIXA PAI (Segura a imagem e o texto juntos) --- */
+.historia-container {
+  display: flex;             /* Ativa o modo lado a lado */
+  align-items: center;       /* Centraliza verticalmente (meio com meio) */
+  justify-content: center;   /* Centraliza tudo na tela */
+  
+  /* O SEGREDO PARA NÃO GRUDAR NOS CANTOS: */
+  width: 90%;                /* Ocupa 90% da tela (deixa 5% de respiro de cada lado) */
+  max-width: 1200px;         /* Mas nunca passa de 1200px de largura */
+  margin: 60px auto;         /* Margem em cima/baixo e AUTO nas laterais para centralizar */
+  gap: 50px;                 /* Espaço generoso entre a impressora e o texto */
+}
+
+/* --- LADO DA IMAGEM --- */
+.historia-img-box {
+  flex: 1;                   /* Ocupa 1 parte do espaço */
+  display: flex;
+  justify-content: flex-end; /* Empurra a imagem para perto do texto */
+}
+
+.historia-img-box img {
+  width: 100%;               /* Responsivo */
+  max-width: 550px;          /* Tamanho máximo da impressora */
+  height: auto;
+  display: block;
+}
+
+/* --- LADO DO TEXTO --- */
+.historia-texto-box {
+  flex: 1;                   /* Ocupa 1 parte do espaço (mesmo tamanho da imagem) */
+}
+
+.historia-texto-box h3 {
+  color: #00AFEF; 
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 22px;           /* Tamanho ajustado para leitura */
+  line-height: 1.5;          /* Espaçamento entre linhas */
+  text-align: left;          /* Alinhado à esquerda */
+  text-transform: uppercase;
+  margin: 0;                 /* Remove margens padrão */
+}
+
+.mapa-footer {
+  display: flex;             /* Ativa o modo lado a lado */
+  align-items: center;       /* Centraliza verticalmente (meio com meio) */
+  justify-content: center;   /* Centraliza tudo na tela */
+}
+
+footer {
+  margin-top: 30px;
+  position: relative;
+  width: 100%;
+  /* Ajuste a altura conforme o tamanho do seu degradê */
+  height: 300px; 
+  margin-top: 50px; /* Separa do conteúdo anterior */
+  
+  /* CONFIGURAÇÃO DO FUNDO (DEGRADÊ) */
+  background-image: url('imagens/degradefooter.png'); 
+  background-repeat: no-repeat;
+  background-position: bottom center; /* Cola o degradê no chão */
+  background-size: cover; /* Faz a imagem cobrir a largura toda */
+  
+  /* Alinhamento dos botões */
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+}
+
+.footer-content {
+  display: flex;
+  gap: 60px; /* Espaço entre o botão do Insta e do Whats */
+  align-items: center;
+  
+  /* Se quiser descer os botões para a parte amarela, use padding-top.
+     Exemplo: padding-top: 100px; */
+}
+
+/* --- ESTILO DOS BOTÕES --- */
+.social-btn {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre o ícone e o texto */
+  
+  /* Fontes e Cores */
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #4a4a4a; /* Cinza escuro (para contrastar com o amarelo) */
+  
+  /* Suaviza a animação */
+  transition: all 0.3s ease-in-out;
+  
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.social-btn svg {
+  width: 30px;
+  height: 30px;
+  stroke-width: 2.5; /* Deixa o ícone mais gordinho */
+}
+
+/* --- A ANIMAÇÃO --- */
+.social-btn:hover {
+  /* O botão sobe um pouco e aumenta de tamanho */
+  transform: translateY(-5px) scale(1.05);
+  
+  /* Muda a cor do fundo para branco suave */
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Cores específicas ao passar o mouse */
+.social-btn.instagram:hover {
+  color: #E1306C; /* Cor oficial do Instagram */
+  stroke: #E1306C; /* Pinta o ícone também */
+}
+
+.social-btn.whatsapp:hover {
+  color: #25D366; /* Cor oficial do Whatsapp */
+  stroke: #25D366;
+}
+
+/* --- RESPONSIVO (Celular) --- */
+@media (max-width: 600px) {
+  .footer-content {
+      flex-direction: column; /* Um embaixo do outro no celular */
+      gap: 20px;
+  }
+  
+  footer {
+      height: auto; /* Altura automática no celular */
+      padding: 50px 0;
+      background-size: cover;
+  }
+}
