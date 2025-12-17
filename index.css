@@ -768,3 +768,191 @@ footer {
       background-size: cover;
   }
 }
+
+/* ======================================================= */
+/* RESPONSIVIDADE 2.0 (Versão Ajustada para Celular)       */
+/* ======================================================= */
+
+@media (max-width: 850px) {
+
+  /* Regra geral para impedir rolagem lateral */
+  body, html {
+      overflow-x: hidden;
+      width: 100%;
+  }
+
+  /* --- 1. HEADER (CABEÇALHO) --- */
+  header {
+      height: auto;
+      flex-direction: column;
+      padding: 10px 0;
+      gap: 10px;
+      margin-bottom: 10px; /* Reduzi a margem inferior */
+  }
+
+  header img {
+      margin-top: 20px;
+      height: 45px; /* Logo um pouquinho menor */
+  }
+
+  /* CORREÇÃO: Links em linha (lado a lado) em vez de fila indiana */
+  #AncorasNavegacao {
+      flex-direction: row;      /* Volta a ficar em linha */
+      flex-wrap: wrap;          /* Se não couber, quebra linha */
+      justify-content: center;  /* Centraliza */
+      gap: 15px;                /* Espaço entre os links */
+  }
+
+  #AncorasNavegacao a {
+      font-size: 14px;          /* Fonte menor para caber na mesma linha */
+      padding: 5px;
+      margin: 0;
+  }
+
+  /* --- 2. TÍTULO PNG (h1Home) --- */
+  /* CORREÇÃO: "Muito colado com as laterais" */
+  .h1Home {
+      width: 100%;
+      padding: 0 30px;          /* Adiciona "ar" nas laterais (30px de cada lado) */
+      box-sizing: border-box;   /* Garante que o padding não estoure a tela */
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
+  
+  .h1Home img {
+      width: 100%;              /* Garante que a imagem respeite o padding */
+      height: auto;
+  }
+
+  /* --- 3. CARROSSEL DE FACHADAS --- */
+  /* CORREÇÃO: "Imagens muito grandes" */
+  .carousel-container {
+      padding: 10px 0;          /* Reduzi o padding vertical */
+  }
+
+  .carousel-item {
+      width: 75vw;              /* Largura um pouco menor */
+      height: 180px;            /* CORREÇÃO: Reduzi de 250px para 180px */
+      margin: 0 8px;
+  }
+
+ /* --- 4. SECTION 2 (Total Visibilidade) --- */
+ .ImageSection2 {
+  /* Aumentei para -30px para puxar bem mais para perto do carrossel */
+  margin-top: 20px;        
+  margin-bottom: 0;         /* Remove margem de baixo */
+  padding: 0 10px;
+  height: auto;
+  
+  /* O SEGREDO DA CENTRALIZAÇÃO: */
+  display: flex;
+  justify-content: center;  /* Centraliza a imagem horizontalmente */
+  width: 100%;
+}
+
+.ImageSection2 img {
+  width: 100%;              /* Ocupa a largura disponível */
+  max-width: 400px;         /* Trava num tamanho bom para não ficar gigante */
+  height: auto;
+  display: block;           /* Remove espaços fantasmas abaixo da imagem */
+}
+
+/* --- CORREÇÃO DEFINITIVA DO BOTÃO WHATSAPP --- */
+.ImageSection2-2 {
+  width: 100%;
+  margin-top: -70px; /* Seu ajuste de altura mantido */
+  
+  /* Centraliza o elemento filho (o link <a>) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* O SEGREDO: O link também precisa alinhar o que tem dentro dele */
+.ImageSection2-2 a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Garante que o link tenha espaço para centralizar */
+  text-decoration: none;
+}
+
+.ImageSection2-2 img {
+  display: block;
+  width: 280px;
+  max-width: 80%;
+  
+  /* Remove qualquer margem antiga que esteja empurrando */
+  margin: 0 !important; 
+}
+
+  h2 {
+      margin-top: -60px;           /* Ajuste do titulo "Conheça os formatos" */
+      font-size: 18px;
+      padding: 0 15px;
+      text-align: center;
+  }
+
+  /* --- 5. GRADE DE SERVIÇOS (MANTIDO IGUAL - ESTÁ ÓTIMO) --- */
+  .container-servicos {
+      grid-template-columns: 1fr 1fr; 
+      gap: 10px;
+      padding: 10px;
+  }
+  
+  .card-servico { padding: 8px; }
+  .nome-servico { font-size: 11px; padding: 5px; }
+
+  /* --- 6. CARROSSEL DE CLIENTES --- */
+  /* CORREÇÃO: "Marcas cortadas" e "Ficou grande" */
+  .h3Home img {
+      width: 70%;               /* Diminui o título "Nossos Clientes" */
+      margin: 20px auto 10px auto;
+      display: block;
+  }
+
+  .carousel-item2 {
+      width: 105px;              /* CORREÇÃO: Quadrado bem menor */
+      height: 105px;
+      margin: 0 5px;
+      background: #fff;         /* Garante fundo branco se o logo for transparente */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .carousel-item2 img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;      /* CORREÇÃO MÁGICA: Faz o logo caber inteiro sem cortar */
+      padding: 5px;             /* Espacinho interno para não grudar na borda */
+  }
+
+  /* --- 7. HISTÓRIA --- */
+  .historia-container {
+      flex-direction: column;
+      width: 80%;
+      gap: 15px;
+      margin: 30px auto;
+  }
+  
+  .historia-texto-box h3 {
+      font-size: 13px;          /* Fonte menor */
+      line-height: 1.4;
+  }
+
+  /* --- 8. FOOTER --- */
+  footer {
+      padding: 30px 15px;
+  }
+  
+  .footer-content {
+      gap: 15px;
+  }
+  
+  .social-btn {
+      width: 100%;
+      justify-content: center;
+      font-size: 16px;          /* Fonte do botão menor */
+  }
+}
